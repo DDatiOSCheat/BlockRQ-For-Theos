@@ -18,4 +18,4 @@
 
 # testing app
 - chrome : working perfect
-- free fire : crash (idk what happend if anyone know fix dm me dc : 48x20)
+- free fire : crash
