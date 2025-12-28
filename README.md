@@ -19,3 +19,4 @@
 # testing app
 - chrome : working perfect
 - free fire : crash
+- other : ???
