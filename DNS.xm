@@ -2,19 +2,16 @@
 #include <substrate.h>
 
 BOOL matchesDomainWithWildcard(NSString *urlString, NSString *domainPattern) {
-    // Convert wildcard domain pattern to a regular expression
     NSString *regexPattern = [domainPattern stringByReplacingOccurrencesOfString:@"*" withString:@".*"];
     NSError *error = nil;
     
-    // Create the regex object
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexPattern options:0 error:&error];
     
     if (error) {
         NSLog(@"Error creating regex: %@", error);
         return NO;
     }
-    
-    // Check if the URL matches the regex pattern
+
     NSRange range = NSMakeRange(0, [urlString length]);
     NSUInteger matches = [regex numberOfMatchesInString:urlString options:0 range:range];
     
@@ -26,7 +23,6 @@ BOOL matchesDomainWithWildcard(NSString *urlString, NSString *domainPattern) {
 - (instancetype)initWithURL:(NSURL *)URL {
     NSString *urlString = [URL absoluteString];
     
-    // Define your blocklist with the new domains
     NSArray *blockedDomains = @[
         @"*.cloudfront.net",
         @"dl.dir.freefiremobile.com",
@@ -55,18 +51,16 @@ BOOL matchesDomainWithWildcard(NSString *urlString, NSString *domainPattern) {
         @"bdversion.ggbluefox.com"
     ];
     
-    // Block requests if the URL matches any domain in the blocklist
     for (NSString *domain in blockedDomains) {
         if (matchesDomainWithWildcard(urlString, domain)) {
             NSLog(@"Blocked domain: %@", urlString);
             
-            // We return nil here, which will effectively cancel the request
-            return nil;  // Block the request
+            return nil;
             
         }
     }
     
-    return %orig(URL); // Return original URL request if not blocked
+    return %orig(URL);
 }
 
 %end
