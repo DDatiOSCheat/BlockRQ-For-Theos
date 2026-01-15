@@ -1,4 +1,4 @@
-# dns-for-theos
+# BlockRQ-For-Theos
 - using for block request domain like an dns
 
 # how to using it
